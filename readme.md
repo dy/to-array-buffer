@@ -16,3 +16,7 @@ var ab = toArrayBuffer(ndarray);
 //please note that for strings you have to define encoding etc, so create buffer at first
 var ab = toArrayBuffer(new Buffer('abc'));
 ```
+
+## Related
+
+> [buffer-to-arraybuffer](https://npmjs.org/package/buffer-to-arraybuffer) — convert surely known Buffer datatype to ArrayBuffer.

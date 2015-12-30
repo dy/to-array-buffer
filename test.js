@@ -1,0 +1,21 @@
+var assert = require('assert');
+var NDArray = require('ndarray');
+var isBrowser = require('is-browser');
+var AudioBuffer = require('audio-buffer');
+var toAB = require('./');
+
+
+assert(toAB() instanceof ArrayBuffer);
+assert.equal(toAB().byteLength, 0);
+
+assert.equal(toAB(new ArrayBuffer(2)).byteLength, 2);
+
+assert.equal(toAB(new Float32Array(2)).byteLength, 8);
+
+assert.equal(toAB(new Buffer(4)).byteLength, 4);
+
+assert.equal(toAB([1,2,3]).byteLength, 3);
+
+assert.equal(toAB(new AudioBuffer([1,2,3,4])).byteLength, 16);
+
+assert.equal(toAB(new NDArray([1, 2, 3, 4])).byteLength, 4);

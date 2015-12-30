@@ -9,16 +9,16 @@ module.exports = function toArrayBuffer (arg) {
 	if (!arg) return new ArrayBuffer();
 
 	//array buffer already
-	if (arg instanceof ArrayBuffer) return arg.slice();
+	if (arg instanceof ArrayBuffer) return arg;
 
 	//array buffer view: TypedArray, DataView, Buffer etc
 	if (ArrayBuffer.isView(arg)) {
-		var offset = arg.byteOffset || 0;
-		var length = arg.byteLength || arg.buffer.byteLength;
-		return arg.buffer.slice(offset, offset + length);
+		if (arg.byteOffset != null) return arg.buffer.slice(arg.byteOffset, arg.byteOffset + arg.byteLength);
+		return arg.buffer;
 	}
 
 	//audio-buffer
+	//FIXME: find a faster way than copying per-channel data
 	if (isAudioBuffer(arg)) {
 		var data = new Float32Array(arg.length * arg.numberOfChannels);
 
@@ -29,7 +29,7 @@ module.exports = function toArrayBuffer (arg) {
 		return data.buffer;
 	}
 
-	//buffer/data-nested: NDArray, ImageData etc.
+	//buffer/data nested: NDArray, ImageData etc.
 	//FIXME: NDArrays with custom data type cause butthurt
 	if (arg.buffer || arg.data) {
 		return toArrayBuffer(arg.buffer || arg.data);

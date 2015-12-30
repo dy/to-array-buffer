@@ -4,17 +4,18 @@
 
 var isAudioBuffer = require('is-audio-buffer');
 
-module.exports = function toArrayBuffer (arg) {
+module.exports = function toArrayBuffer (arg, clone) {
 	//zero-len or undefined-like
 	if (!arg) return new ArrayBuffer();
 
 	//array buffer already
-	if (arg instanceof ArrayBuffer) return arg;
+	if (arg instanceof ArrayBuffer) return clone ? arg.slice() : arg;
 
 	//array buffer view: TypedArray, DataView, Buffer etc
+	//FIXME: as only Buffe obtain the way to provide subArrayBuffer - use that
 	if (ArrayBuffer.isView(arg)) {
 		if (arg.byteOffset != null) return arg.buffer.slice(arg.byteOffset, arg.byteOffset + arg.byteLength);
-		return arg.buffer;
+		return clone ? arg.buffer.slice() : arg.buffer;
 	}
 
 	//audio-buffer
@@ -32,7 +33,8 @@ module.exports = function toArrayBuffer (arg) {
 	//buffer/data nested: NDArray, ImageData etc.
 	//FIXME: NDArrays with custom data type cause butthurt
 	if (arg.buffer || arg.data) {
-		return toArrayBuffer(arg.buffer || arg.data);
+		var result = toArrayBuffer(arg.buffer || arg.data);
+		return clone ? result.slice() : result;
 	}
 
 	//array-like or unknown

@@ -19,3 +19,8 @@ assert.equal(toAB([1,2,3]).byteLength, 3);
 assert.equal(toAB(new AudioBuffer([1,2,3,4])).byteLength, 16);
 
 assert.equal(toAB(new NDArray([1, 2, 3, 4])).byteLength, 4);
+
+//clone
+var ab = new ArrayBuffer(2);
+assert.equal(toAB(ab), ab);
+assert.notEqual(toAB(ab, true), ab);

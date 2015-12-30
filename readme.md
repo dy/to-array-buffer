@@ -17,6 +17,6 @@ var ab = toArrayBuffer(ndarray);
 var ab = toArrayBuffer(new Buffer('abc'));
 ```
 
-## Related
+### Related
 
 > [buffer-to-arraybuffer](https://npmjs.org/package/buffer-to-arraybuffer) — convert surely known Buffer datatype to ArrayBuffer.

@@ -4,8 +4,7 @@
 
 var isAudioBuffer = require('is-audio-buffer');
 var isUri = require('is-data-uri')
-var d2b = require('data-uri-to-buffer')
-var b2ab = require('buffer-to-arraybuffer')
+var atob = require('atob-lite')
 
 module.exports = function toArrayBuffer (arg, clone) {
 	//zero-length or undefined-like
@@ -44,9 +43,9 @@ module.exports = function toArrayBuffer (arg, clone) {
 	if (typeof arg === 'string') {
 		//valid data uri
 		if (isUri(arg)) {
-			var buf = d2b(arg)
-			var ab = b2ab(buf)
-			return ab
+			var binary = atob(arg.split(',')[1]), array = [];
+			for(var i = 0; i < binary.length; i++) array.push(binary.charCodeAt(i));
+			return new Uint8Array(array)
 		}
 		//plain string
 		else {

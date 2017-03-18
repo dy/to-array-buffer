@@ -33,5 +33,5 @@ refAb = toArrayBuffer(new Uint8Array([1, 2, 3]), true)
 
 ### Related
 
-> [save-file](https://github.com/dfcreative/save-file) — save any input data to file in node/browser.
-> [buffer-to-arraybuffer](https://npmjs.org/package/buffer-to-arraybuffer) — convert surely known Buffer datatype to ArrayBuffer.
+* [save-file](https://github.com/dfcreative/save-file) — save any input data to file in node/browser.
+* [buffer-to-arraybuffer](https://npmjs.org/package/buffer-to-arraybuffer) — convert surely known Buffer datatype to ArrayBuffer.

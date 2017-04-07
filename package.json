@@ -1,6 +1,6 @@
 {
   "name": "to-array-buffer",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Convert anything (reasonable) to ArrayBuffer",
   "main": "index.js",
   "scripts": {

@@ -23,7 +23,8 @@ module.exports = function toArrayBuffer (arg, clone) {
 	//audio-buffer - note that we simply merge data by channels
 	//no encoding or cleverness involved
 	if (isAudioBuffer(arg)) {
-		var data = new Float32Array(arg.length * arg.numberOfChannels);
+		var floatArray = arg.getChannelData(0).constructor;
+		var data = new floatArray(arg.length * arg.numberOfChannels);
 
 		for (var channel = 0; channel < arg.numberOfChannels; channel++) {
 			data.set(arg.getChannelData(channel), channel * arg.length);

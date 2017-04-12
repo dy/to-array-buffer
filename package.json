@@ -34,10 +34,10 @@
     "is-data-uri": "^0.1.0"
   },
   "devDependencies": {
+    "audio-buffer": "^3.1.0",
+    "audio-context": "^0.1.0",
     "buffer-to-arraybuffer": "0.0.4",
     "data-uri-to-buffer": "0.0.4",
-    "audio-buffer": "^2.2.0",
-    "audio-context": "^0.1.0",
     "is-browser": "^2.0.1",
     "ndarray": "^1.0.18"
   }

@@ -34,7 +34,7 @@ ab = toArrayBuffer(encode('abc'))
 
 ### Related
 
-* [to-arraybuffer](https://www.npmjs.com/package/to-arraybuffer) − convert Buffer to ArrayBuffer, fast implementation
+* [to-arraybuffer](https://www.npmjs.com/package/to-arraybuffer) − convert Buffer to ArrayBuffer, fast implementation.
 * [data-uri-to-buffer](https://npmjs.org/package/data-uri-to-buffer) − advanced data-uri decoder.
 * [save-file](https://github.com/dfcreative/save-file) — save any input data to file in node/browser.
 * [buffer-to-arraybuffer](https://npmjs.org/package/buffer-to-arraybuffer) — convert surely known Buffer datatype to ArrayBuffer.

@@ -4,19 +4,18 @@
 
 'use strict'
 
-var isAudioBuffer = require('is-audio-buffer');
 var atob = require('atob-lite')
 var isBase64 = require('is-base64')
 
-
-module.exports = function toArrayBuffer (arg, clone) {
+//FIXME: what is the good way to go on with this package?
+module.exports = function toArrayBuffer (arg) {
 	//zero-length or undefined-like
 	if (!arg) return new ArrayBuffer();
 
 	//array buffer
-	if (arg instanceof ArrayBuffer) return clone ? arg.slice() : arg;
+	if (arg instanceof ArrayBuffer) return arg;
 
-	//try to decode data-uri, if any
+	//try to decode data-uri
 	if (typeof arg === 'string') {
 		//valid data uri
 		if (/^data\:/i.test(arg)) {
@@ -33,30 +32,16 @@ module.exports = function toArrayBuffer (arg, clone) {
 	}
 
 	//array buffer view: TypedArray, DataView, Buffer etc
-	//FIXME: as only Buffer obtains the way to provide subArrayBuffer - use that
 	if (ArrayBuffer.isView(arg)) {
 		if (arg.byteOffset != null) return arg.buffer.slice(arg.byteOffset, arg.byteOffset + arg.byteLength);
-		return clone ? arg.buffer.slice() : arg.buffer;
-	}
-
-	//audio-buffer - note that we simply merge data by channels
-	//no encoding or cleverness involved
-	if (isAudioBuffer(arg)) {
-		var floatArray = arg.getChannelData(0).constructor;
-		var data = new floatArray(arg.length * arg.numberOfChannels);
-
-		for (var channel = 0; channel < arg.numberOfChannels; channel++) {
-			data.set(arg.getChannelData(channel), channel * arg.length);
-		}
-
-		return data.buffer;
+		return arg.buffer;
 	}
 
 	//buffer/data nested: NDArray, ImageData etc.
 	//FIXME: NDArrays with custom data type may be invalid for this procedure
-	if (arg.buffer || arg.data) {
-		var result = toArrayBuffer(arg.buffer || arg.data);
-		return clone ? result.slice() : result;
+	if (arg.buffer || arg.data || arg._data) {
+		var result = toArrayBuffer(arg.buffer || arg.data || arg._data);
+		return result;
 	}
 
 	//array-like or unknown

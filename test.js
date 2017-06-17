@@ -33,17 +33,6 @@ t('Array', t => {
 	t.end()
 })
 
-t('AudioBuffer', t => {
-	t.equal(toAB(new AudioBuffer([1,2,3,4], {floatArray: Float64Array, isWAA: false})).byteLength, 32);
-	t.equal(toAB(new AudioBuffer([.1,.2,.3,.4], {floatArray: Float32Array})).byteLength, 16 )
-	t.end()
-})
-
-t('ndarray', t => {
-	t.equal(toAB(new NDArray([1, 2, 3, 4])).byteLength, 4);
-	t.end()
-})
-
 t('data-uri bare-bones', t => {
 	var uri = 'data:,Hello%2C%20World!';
     var buf = toAB(uri);
@@ -90,13 +79,3 @@ t('decode "UTF-8 in Base64"')
 t('base64')
 
 t('non-decodable')
-
-t('clone', t => {
-	//clone
-	var ab = new ArrayBuffer(2);
-	t.equal(toAB(ab), ab);
-	t.notEqual(toAB(ab, true), ab);
-	t.end()
-})
-
-t('Image')

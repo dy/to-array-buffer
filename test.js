@@ -2,7 +2,6 @@
 
 var NDArray = require('ndarray');
 var isBrowser = require('is-browser');
-var AudioBuffer = require('audio-buffer');
 var toAB = require('./');
 var t = require('tape')
 

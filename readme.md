@@ -10,6 +10,9 @@ Turn binary-like into an ArrayBuffer:
 * base64 string
 * plain string
 * Array
+* etc.
+
+It is not intended to cover any custom data types, like `ImageData`, `AudioBuffer` etc, so convert them manually.
 
 [![npm install to-array-buffer](https://nodei.co/npm/to-array-buffer.png?mini=true)](https://npmjs.org/package/to-array-buffer/)
 

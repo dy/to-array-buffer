@@ -1,3 +1,5 @@
+# to-array-buffer [![unstable](https://img.shields.io/badge/stability-unstable-orange.svg)](http://github.com/badges/stability-badges) [![Build Status](https://img.shields.io/travis/dfcreative/to-array-buffer.svg)](https://travis-ci.org/dfcreative/to-array-buffer)
+
 Turn a buffer-like to an ArrayBuffer:
 
 * Buffer

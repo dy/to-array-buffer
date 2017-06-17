@@ -1,12 +1,14 @@
 Turn a buffer-like to an ArrayBuffer:
 
-* Buffer to ArrayBuffer
-* ArrayBuffer view (TydedArray, FloatArray, DataView etc) to ArrayBuffer
-* [AudioBuffer](http://github.com/audiojs/audio-buffer) to ArrayBuffer
-* ImageData to ArrayBuffer
-* [ndarray](https://github.com/scijs/ndarray) to ArrayBuffer
-* String to ArrayBuffer
-* Array to ArrayBuffer
+* Buffer
+* ArrayBuffer view (TydedArray, FloatArray, DataView etc)
+* [AudioBuffer](http://github.com/audiojs/audio-buffer)
+* ImageData
+* [ndarray](https://github.com/scijs/ndarray)
+* data-uri (limited)
+* base64
+* String
+* Array
 
 [![npm install to-array-buffer](https://nodei.co/npm/to-array-buffer.png?mini=true)](https://npmjs.org/package/to-array-buffer/)
 
@@ -33,5 +35,6 @@ refAb = toArrayBuffer(new Uint8Array([1, 2, 3]), true)
 
 ### Related
 
+* [data-uri-to-buffer](https://npmjs.org/package/data-uri-to-buffer) − advanced data-uri decoder.
 * [save-file](https://github.com/dfcreative/save-file) — save any input data to file in node/browser.
 * [buffer-to-arraybuffer](https://npmjs.org/package/buffer-to-arraybuffer) — convert surely known Buffer datatype to ArrayBuffer.

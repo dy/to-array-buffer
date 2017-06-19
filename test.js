@@ -78,3 +78,8 @@ t('decode "UTF-8 in Base64"')
 t('base64')
 
 t('non-decodable')
+
+t.skip('unicode data-uri', t => {
+    t.equal(toAB('uuLMhh').byteLength, 16)
+    t.end()
+})

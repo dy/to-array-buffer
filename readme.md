@@ -23,13 +23,9 @@ var context = require('audio-context')
 //Get array buffer from any object.
 ab = toArrayBuffer(new Buffer(100))
 ab = toArrayBuffer(new Float32Array(12))
-ab = toArrayBuffer([1, 2, 3])
-ab = toArrayBuffer(imageData)
+ab = toArrayBuffer(dataURIstr)
+ab = toArrayBuffer(base64str)
 ab = toArrayBuffer(ndarray)
-ab = toArrayBuffer(dataUri)
-
-//Please note that for strings you may want to decode/encode etc.
-ab = toArrayBuffer(encode('abc'))
 ```
 
 ### Related

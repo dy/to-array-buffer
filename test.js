@@ -35,7 +35,7 @@ t('Array', t => {
 t('data-uri bare-bones', t => {
 	var uri = 'data:,Hello%2C%20World!';
     var buf = toAB(uri);
-    t.equal('Hello, World!', String.fromCharCode.apply(null, new Uint16Array(buf)));
+    t.equal('Hello, World!', String.fromCharCode.apply(null, new Uint8Array(buf)));
 
     t.end()
 })
@@ -56,7 +56,7 @@ t('plain-text Data URIs', t => {
     var uri = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
 
     var buf = toAB(uri);
-    t.equal(html, String.fromCharCode.apply(null, new Uint16Array(buf)));
+    t.equal(html, String.fromCharCode.apply(null, new Uint8Array(buf)));
     t.end()
 })
 t.skip('decode "ISO-8859-8 in Base64" URIs', t => {

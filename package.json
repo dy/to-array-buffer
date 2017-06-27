@@ -23,8 +23,8 @@
   },
   "homepage": "https://github.com/dfcreative/to-array-buffer#readme",
   "dependencies": {
-    "atob-lite": "^2.0.0",
-    "is-base64": "^0.0.2"
+    "is-base64": "^0.0.2",
+    "string-to-arraybuffer": "^1.0.0"
   },
   "devDependencies": {
     "buffer-to-arraybuffer": "^0.0.4",

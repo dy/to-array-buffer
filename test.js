@@ -40,9 +40,21 @@ t('data-uri bare-bones', t => {
     t.end()
 })
 t('data-uri bare-bones base64', t => {
-	var uri = 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D';
+    var uri = 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D';
     var buf = toAB(uri);
     t.equal('Hello, World!', String.fromCharCode.apply(null, new Uint8Array(buf)));
+    t.end()
+})
+t.skip('File, Blob', t => {
+    if (!global.File || !global.Blob) return t.end()
+
+	var uri = 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D';
+    let file = new File([uri], 'hw.txt')
+    let blob = new Blob([uri])
+
+    t.equal(String.fromCharCode.apply(null, new Uint8Array(toAB(file))), 'Hello, World!')
+    t.equal(String.fromCharCode.apply(null, new Uint8Array(toAB(blob))), 'Hello, World!')
+
     t.end()
 })
 t('plain-text Data URIs', t => {
@@ -81,5 +93,14 @@ t('non-decodable')
 
 t.skip('unicode data-uri', t => {
     t.equal(toAB('uuLMhh').byteLength, 16)
+    t.end()
+})
+
+t('nested arrays', t => {
+    t.deepEqual(
+        Array.from(toAB([[0,0,0,0], new Uint8Array([1,1,1,1])]))
+        [0,0,0,0,1,1,1,1],
+    )
+
     t.end()
 })

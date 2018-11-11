@@ -1,6 +1,6 @@
 {
   "name": "to-array-buffer",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "Convert any binary data to ArrayBuffer",
   "main": "index.js",
   "scripts": {

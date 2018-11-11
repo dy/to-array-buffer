@@ -39,7 +39,17 @@ module.exports = function toArrayBuffer (arg) {
 		return result
 	}
 
+	// detect if flat
+	if (arg.length != null) {
+		for (var i = 0; i < arg.length; i++) {
+			if (arg[i].length != null) {
+				arg = flat(arg)
+				break
+			}
+		}
+	}
+
 	//array-like or unknown
 	//hope Uint8Array knows better how to treat the input
-	return (new Uint8Array(arg.length != null ? flat(arg) : [arg])).buffer
+	return (new Uint8Array(arg.length != null ? arg : [arg])).buffer
 }

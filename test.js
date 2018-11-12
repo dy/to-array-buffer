@@ -7,8 +7,8 @@ var t = require('tape')
 
 
 t('basics', t => {
-	t.ok(toAB() instanceof ArrayBuffer);
-	t.equal(toAB().byteLength, 0);
+	t.ok(toAB(1) instanceof ArrayBuffer);
+	t.equal(toAB(1).byteLength, 1);
 	t.end()
 })
 
@@ -101,6 +101,15 @@ t('nested arrays', t => {
         [0,0,0,0,1,1,1,1],
         new Uint8Array(toAB([[0,0,0,0], new Uint8Array([1,1,1,1])]))
     )
+
+    t.end()
+})
+
+t('bad input', t => {
+    t.notOk(toAB(null))
+    t.notOk(toAB())
+    t.notOk(toAB(/abc/))
+    t.notOk(toAB(new Date))
 
     t.end()
 })

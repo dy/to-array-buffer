@@ -11,7 +11,7 @@ var flat = require('flatten-vertex-data')
 
 module.exports = function toArrayBuffer (arg) {
 	//zero-length or undefined-like
-	if (!arg) return new ArrayBuffer()
+	if (!arg) return null
 
 	//array buffer
 	if (arg instanceof ArrayBuffer) return arg
@@ -50,6 +50,9 @@ module.exports = function toArrayBuffer (arg) {
 	}
 
 	//array-like or unknown
-	//hope Uint8Array knows better how to treat the input
-	return (new Uint8Array(arg.length != null ? arg : [arg])).buffer
+	//consider Uint8Array knows how to treat the input
+	var result = new Uint8Array(arg)
+
+	if (!result.length) return null
+	return result.buffer
 }

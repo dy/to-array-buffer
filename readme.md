@@ -11,9 +11,10 @@ Turn any binary data container into an _ArrayBuffer_ in sync way. Detected conta
 * plain string
 * Array
 * Array of Arrays
+* Number (creates new ArrayBuffer of the defined length in bytes)
 * etc.
 
-It is not intended to cover any custom data types, like `ImageData`, `AudioBuffer` etc, but that is a good for fallback any-data detection.
+It also handles some custom data types, like `ImageData`, `AudioBuffer` etc., but in general it returns `null` for objects not looking like binary data containers. Note also that it does not handle _Blob_ and _File_, since they require async API.
 
 [![npm install to-array-buffer](https://nodei.co/npm/to-array-buffer.png?mini=true)](https://npmjs.org/package/to-array-buffer/)
 
@@ -21,12 +22,13 @@ It is not intended to cover any custom data types, like `ImageData`, `AudioBuffe
 var toArrayBuffer = require('to-array-buffer')
 var context = require('audio-context')
 
-//Get array buffer from any object.
+// Get array buffer from any object
 ab = toArrayBuffer(new Buffer(100))
 ab = toArrayBuffer(new Float32Array(12))
 ab = toArrayBuffer(dataURIstr)
 ab = toArrayBuffer(base64str)
 ab = toArrayBuffer(ndarray)
+ab = toArrayBuffer([[0, 1, 0], [1, 0, 1]])
 ```
 
 ### Related

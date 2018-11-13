@@ -23,7 +23,20 @@ t('Float32Array', t => {
 })
 
 t('Buffer', t => {
-	t.equal(toAB(new Buffer(4)).byteLength, 4);
+    var u8ab = new Uint8Array(4)
+
+    var b = Buffer.from(u8ab.buffer)
+    var ab = toAB(b)
+    t.equal(ab.byteLength, 4)
+
+    var u8ab2 = new Uint8Array(ab)
+    var u8b = new Uint8Array(b.buffer)
+
+    t.deepEqual(u8ab2, u8b)
+
+    u8ab2[0] = 100
+    t.equal(u8b[0], 100, 'reference buffer instead of copy')
+
 	t.end()
 })
 

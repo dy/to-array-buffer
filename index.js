@@ -28,7 +28,9 @@ module.exports = function toArrayBuffer (arg) {
 
 	//array buffer view: TypedArray, DataView, Buffer etc
 	if (ArrayBuffer.isView(arg)) {
-		if (arg.byteOffset != null) return arg.buffer.slice(arg.byteOffset, arg.byteOffset + arg.byteLength)
+		if (arg.byteOffset != null) {
+			return new Uint8Array(arg.buffer).subarray(arg.byteOffset, arg.byteOffset + arg.byteLength).buffer
+		}
 		return arg.buffer
 	}
 

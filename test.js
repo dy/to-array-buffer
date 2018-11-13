@@ -35,7 +35,7 @@ t('Buffer', t => {
     t.deepEqual(u8ab2, u8b)
 
     u8ab2[0] = 100
-    t.equal(u8b[0], 100, 'reference buffer instead of copy')
+    t.notEqual(u8b[0], 100, 'reference buffer instead of copy')
 
 	t.end()
 })

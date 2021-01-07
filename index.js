@@ -28,7 +28,8 @@ module.exports = function toArrayBuffer (arg) {
 
 	//array buffer view: TypedArray, DataView, Buffer etc
 	if (ArrayBuffer.isView(arg)) {
-		if (arg.byteOffset != null) {
+		// if byteOffset is not 0, return sub-reference (slice is the only way)
+		if (arg.byteOffset) {
 			return arg.buffer.slice(arg.byteOffset, arg.byteOffset + arg.byteLength)
 		}
 		return arg.buffer
@@ -42,7 +43,7 @@ module.exports = function toArrayBuffer (arg) {
 	}
 
 	// detect if flat
-	if (arg.length != null) {
+	if (Array.isArray(arg)) {
 		for (var i = 0; i < arg.length; i++) {
 			if (arg[i].length != null) {
 				arg = flat(arg)

@@ -5,7 +5,6 @@ var isBrowser = require('is-browser');
 var toAB = require('./');
 var t = require('tape')
 
-
 t('basics', t => {
 	t.ok(toAB(1) instanceof ArrayBuffer);
 	t.equal(toAB(1).byteLength, 1);
@@ -29,13 +28,13 @@ t('Buffer', t => {
     var ab = toAB(b)
     t.equal(ab.byteLength, 4)
 
-    var u8ab2 = new Uint8Array(ab)
+    var u8ab = new Uint8Array(ab)
     var u8b = new Uint8Array(b.buffer)
 
-    t.deepEqual(u8ab2, u8b)
+    t.deepEqual(u8ab, u8b)
 
-    u8ab2[0] = 100
-    t.notEqual(u8b[0], 100, 'reference buffer instead of copy')
+    u8ab[0] = 100
+    t.equal(u8b[0], 100, 'reference buffer instead of copy')
 
 	t.end()
 })
@@ -123,6 +122,35 @@ t('bad input', t => {
     t.notOk(toAB())
     t.notOk(toAB(/abc/))
     t.notOk(toAB(new Date))
+
+    t.end()
+})
+
+t.skip('huge files', async t => {
+    // save-file case of saving 2gb file
+    // https://github.com/dy/save-file/issues/15
+
+    // var fs = require('fs')
+    // let a = fs.readFileSync('./test.mkv')
+    let resp = await fetch('./test.mkv')
+    let blob = await resp.blob()
+
+    var ab = await new Promise(ok => {
+        var fileReader = new FileReader();
+        fileReader.onload = function(event) {
+            ok(event.target.result);
+        };
+        fileReader.readAsArrayBuffer(blob);
+    })
+
+    let byteArray = new Int8Array(ab)
+
+    // toAB(byteArray)
+    // let data = new Blob([byteArray], {type: 'application/octet-stream'})
+
+    // require('../save-file/src/to-blob')(byteArray, 'x.mkv')
+    let save = require('../save-file')
+    save(byteArray, 'x.mkv')
 
     t.end()
 })

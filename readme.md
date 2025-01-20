@@ -1,4 +1,4 @@
-# to-array-buffer [![unstable](https://img.shields.io/badge/stability-unstable-orange.svg)](http://github.com/badges/stability-badges) [![Build Status](https://img.shields.io/travis/dy/to-array-buffer.svg)](https://travis-ci.org/dy/to-array-buffer)
+# to-array-buffer [![unstable](https://img.shields.io/badge/stability-unstable-orange.svg)](http://github.com/badges/stability-badges)
 
 Turn any binary data container into an _ArrayBuffer_ in sync way. Detected containers:
 
